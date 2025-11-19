@@ -20,9 +20,51 @@
     footer{margin-top:24px;padding:18px 0;color:#666;font-size:.9rem;text-align:center}
     .btn{display:inline-block;padding:10px 14px;border-radius:8px;text-decoration:none;background:#b3478f;color:white}
     form input, form textarea{width:100%;padding:10px;margin-top:8px;border:1px solid #e6e6ee;border-radius:8px}
-    .steps{background:#fff7e6;border-left:4px solid #f6c741;padding:12px;border-radius:8px}
+
+    /* ⭐ MOLDURA ROSÉ NAS FOTOS */
+    .foto img{
+      width:100%;
+      border-radius:12px;
+      border:4px solid #e4b1c1;
+      box-shadow:0 4px 12px rgba(228,177,193,0.4);
+      transition:transform .2s, box-shadow .2s;
+    }
+    .foto img:hover{
+      transform:scale(1.03);
+      box-shadow:0 6px 18px rgba(228,177,193,0.6);
+    }
+    .foto p{
+      text-align:center;
+      margin-top:6px;
+      font-weight:700;
+      color:#b86c89;
+    }
+
     @media(max-width:880px){.hero{grid-template-columns:1fr;}.hero aside{order:2}}
-    img{border-radius:10px;width:100%;}
+
+    /* ⭐ BOTÃO FLUTUANTE DO WHATSAPP */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25d366;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 999;
+      transition: transform .2s;
+    }
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+    }
+    .whatsapp-btn img {
+      width: 35px;
+      height: 35px;
+    }
   </style>
 </head>
 <body>
@@ -69,41 +111,37 @@
           <p>Email: sandramarciafranzoni@hotmail.com</p>
           <a class="btn" href="#contato">Fale comigo</a>
         </div>
-
-       
       </aside>
     </main>
 
     <section class="card" id="galeria">
       <h3>Galeria de Fotos</h3>
-      <p>Adicione aqui imagens dos seus bordados.</p>
+      <p>Veja alguns dos meus trabalhos:</p>
+
       <div class="grid">
-      <div class="grid">
 
-  <div>
-    <p style="text-align:center; margin-bottom:6px;">Toalha de mão</p>
-    <img src="fotos/fotosbordado1.jpg" alt="Toalha de mão">
-  </div>
+        <div class="foto">
+          <p>Toalha de mão</p>
+          <img src="fotos/fotosbordado1.jpg" alt="Toalha de mão">
+        </div>
 
-  <div>
-    <p style="text-align:center; margin-bottom:6px;">Bordado 2</p>
-    <img src="fotos/fotosbordado2.jpg" alt="Bordado 2">
-  </div>
+        <div class="foto">
+          <p>Bordado 2</p>
+          <img src="fotos/fotosbordado2.jpg" alt="Bordado 2">
+        </div>
 
-  <div>
-    <p style="text-align:center; margin-bottom:6px;">Bordado 3</p>
-    <img src="fotos/fotosbordado3.jpg" alt="Bordado 3">
-  </div>
+        <div class="foto">
+          <p>Bordado 3</p>
+          <img src="fotos/fotosbordado3.jpg" alt="Bordado 3">
+        </div>
 
-  <div>
-    <p style="text-align:center; margin-bottom:6px;">Bordado 4</p>
-    <img src="fotos/fotosbordado4.jpg" alt="Bordado 4">
-  </div>
+        <div class="foto">
+          <p>Bordado 4</p>
+          <img src="fotos/fotosbordado4.jpg" alt="Bordado 4">
+        </div>
 
-</div>
-
+      </div>
     </section>
-
 
     <footer>
       © <span id="ano"></span> Sandra Marcia Bordados — Todos os direitos reservados
@@ -112,7 +150,14 @@
 
   <script>
     document.getElementById('ano').textContent = new Date().getFullYear();
-    function fakeSubmit(e){ e.preventDefault(); alert('Obrigado! (formulário de exemplo)'); }
   </script>
+
+  <!-- ⭐ BOTÃO DO WHATSAPP -->
+  <a class="whatsapp-btn"
+     href="https://wa.me/5516991123346?text=Olá!%20Gostaria%20de%20fazer%20um%20pedido%20de%20bordado"
+     target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
+
 </body>
 </html>
