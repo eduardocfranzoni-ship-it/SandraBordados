@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sandra Marcia Bordados</title>
+  <meta name="description" content="Site de bordados personalizados por Sandra Márcia">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Inter, system-ui, Arial;line-height:1.6;color:#222;background:#f7f7fb}
+    .container{max-width:1000px;margin:30px auto;padding:20px}
+    header{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+    .brand{font-weight:700;font-size:2rem;color:#b3478f}
+    nav a{margin-left:16px;text-decoration:none;color:#444}
+    .hero{background:white;border-radius:12px;padding:28px;box-shadow:0 6px 18px rgba(20,20,50,.06);display:grid;grid-template-columns:1fr 320px;gap:24px}
+    .hero h1{font-size:1.8rem;margin-bottom:8px;color:#b3478f}
+    .hero p{color:#555}
+    .card{background:white;border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(20,20,50,.04);margin-top:18px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px}
+    footer{margin-top:24px;padding:18px 0;color:#666;font-size:.9rem;text-align:center}
+    .btn{display:inline-block;padding:10px 14px;border-radius:8px;text-decoration:none;background:#b3478f;color:white}
+    form input, form textarea{width:100%;padding:10px;margin-top:8px;border:1px solid #e6e6ee;border-radius:8px}
+    .steps{background:#fff7e6;border-left:4px solid #f6c741;padding:12px;border-radius:8px}
+    @media(max-width:880px){.hero{grid-template-columns:1fr;}.hero aside{order:2}}
+    img{border-radius:10px;width:100%;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">Sandra Marcia Bordados</div>
+      <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <section>
+        <h1>Bordados personalizados feitos com carinho</h1>
+        <p>Meu nome é <strong>Sandra Márcia</strong> e trabalho com bordados personalizados. Produzo toalhas bordadas, fraldinhas de bebê, enxoval e peças feitas com muito carinho e atenção aos detalhes. Cada item é criado com cuidado para tornar seu presente ainda mais especial.</p>
+
+        <div class="card" id="sobre">
+          <h3>Sobre</h3>
+          <p>Trabalho há anos com bordados personalizados e capricho em cada ponto. Atendo pedidos sob encomenda e preparo cada peça como se fosse única. Meu objetivo é entregar beleza, delicadeza e qualidade.</p>
+        </div>
+
+        <div class="card" id="servicos">
+          <h3>Serviços</h3>
+          <div class="grid">
+            <div class="card"><h4>Toalhas Bordadas</h4><p>Toalhas personalizadas com nomes e desenhos.</p></div>
+            <div class="card"><h4>Kit Bebê</h4><p>Fraldinhas bordadas, paninhos e enxoval completo.</p></div>
+            <div class="card"><h4>Bordados Personalizados</h4><p>Crio peças exclusivas de acordo com seu pedido.</p></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Depoimentos</h3>
+          <p>“Lindo trabalho! Muito caprichosa e atenciosa.” — Cliente X</p>
+        </div>
+      </section>
+
+      <aside>
+        <div class="card">
+          <h3>Contato rápido</h3>
+          <p>Telefone: (xx) xxxxx-xxxx</p>
+          <p>Email: voce@exemplo.com</p>
+          <a class="btn" href="#contato">Fale comigo</a>
+        </div>
+
+       
+      </aside>
+    </main>
+
+    <section class="card" id="galeria">
+      <h3>Galeria de Fotos</h3>
+      <p>Adicione aqui imagens dos seus bordados.</p>
+      <div class="grid">
+      <div class="grid">
+
+  <div>
+    <p style="text-align:center; margin-bottom:6px;">Toalha de mão</p>
+    <img src="fotos/fotosbordado1.jpg" alt="Toalha de mão">
+  </div>
+
+  <div>
+    <p style="text-align:center; margin-bottom:6px;">Bordado 2</p>
+    <img src="fotos/fotosbordado2.jpg" alt="Bordado 2">
+  </div>
+
+  <div>
+    <p style="text-align:center; margin-bottom:6px;">Bordado 3</p>
+    <img src="fotos/fotosbordado3.jpg" alt="Bordado 3">
+  </div>
+
+  <div>
+    <p style="text-align:center; margin-bottom:6px;">Bordado 4</p>
+    <img src="fotos/fotosbordado4.jpg" alt="Bordado 4">
+  </div>
+
+</div>
+
+    </section>
+
+    <section class="card" id="contato">
+      <h3>Formulário de contato</h3>
+      <p>Formulário exemplo — para funcionar de verdade precisa conectar com um serviço.</p>
+      <form onsubmit="fakeSubmit(event)">
+        <label>Nome</label>
+        <input type="text" placeholder="Seu nome" required>
+        <label>Email</label>
+        <input type="email" placeholder="seu@exemplo.com" required>
+        <label>Mensagem</label>
+        <textarea rows="4" placeholder="Escreva sua mensagem"></textarea>
+        <button class="btn" type="submit" style="margin-top:10px">Enviar</button>
+      </form>
+    </section>
+
+    <footer>
+      © <span id="ano"></span> Sandra Marcia Bordados — Todos os direitos reservados
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('ano').textContent = new Date().getFullYear();
+    function fakeSubmit(e){ e.preventDefault(); alert('Obrigado! (formulário de exemplo)'); }
+  </script>
+</body>
+</html>
