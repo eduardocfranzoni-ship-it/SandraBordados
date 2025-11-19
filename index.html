@@ -18,15 +18,60 @@
       --card-shadow: 0 6px 18px rgba(20,20,50,.04);
     }
 
+    /* reset */
     *{box-sizing:border-box;margin:0;padding:0}
+
+    /* ===== BODY / FUNDO DECORADO (apenas CSS — sem imagens externas) ===== */
     body{
       font-family:Inter, system-ui, Arial, sans-serif;
-      line-height:1.6;color:#222;
-      background:
-        radial-gradient(circle at 10% 10%, rgba(227,200,210,0.02), transparent 8%),
-        repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 8px),
-        linear-gradient(180deg, var(--bg), #fbf7fb 60%);
+      line-height:1.6;
+      color:#222;
+
+      /* FUNDO DECORADO (apenas CSS) */
+      background-color:#fdf6fa;
+
+      /* pontos / florzinhas / linha tracejada - textura leve */
+      background-image:
+        radial-gradient(circle at 12% 18%, rgba(225,138,183,0.07) 0 6px, transparent 7px),
+        radial-gradient(circle at 86% 22%, rgba(179,71,143,0.05) 0 8px, transparent 9px),
+        radial-gradient(circle at 24% 72%, rgba(196,150,179,0.05) 0 6px, transparent 7px),
+        radial-gradient(circle at 74% 78%, rgba(225,138,183,0.06) 0 7px, transparent 8px),
+        repeating-linear-gradient(135deg, rgba(179,71,143,0.04) 0 2px, rgba(179,71,143,0) 2px 20px),
+        linear-gradient(180deg, #fff7fc, #f8eef5 60%);
+
+      background-repeat: repeat;
+      background-size: 220px 220px, 220px 220px, 180px 180px, 180px 180px, 28px 28px, cover;
+      background-attachment: fixed;
+      background-position: center;
+
       scroll-behavior:smooth;
+    }
+
+    /* --- LIGHTBOX (ampliar fotos) --- */
+    .lightbox {
+      display:none;
+      position:fixed;
+      top:0; left:0;
+      width:100vw; height:100vh;
+      background:rgba(0,0,0,0.85);
+      justify-content:center;
+      align-items:center;
+      z-index:999999;
+    }
+
+    .lightbox img {
+      max-width:90%;
+      max-height:90%;
+      border-radius:12px;
+      box-shadow:0 0 20px rgba(255,255,255,0.4);
+      animation:fadeZoom .25s ease;
+      border:5px solid #fff;
+      background:#fff;
+    }
+
+    @keyframes fadeZoom {
+      from { transform:scale(0.8); opacity:0; }
+      to { transform:scale(1); opacity:1; }
     }
 
     /* HEADER FIXO */
@@ -38,7 +83,6 @@
     }
     .header-space{height:86px}
     .brand{font-weight:700;font-size:1.6rem;color:var(--accent); display:flex;align-items:center;gap:10px}
-    /* logo removida conforme pedido (deixei espaço para texto) */
     nav a{margin-left:14px;text-decoration:none;color:#444;font-weight:500;transition:.18s}
     nav a:hover{color:var(--accent)}
 
@@ -60,7 +104,11 @@
       display:block;
       margin:auto;
       border:4px solid var(--muted);
+      cursor:pointer;
+      transition:transform .18s, box-shadow .18s;
     }
+
+    .thumb:hover{ transform:scale(1.03); box-shadow:0 8px 20px rgba(0,0,0,0.08); }
 
     /* Batizado usa moldura dourada */
     .thumb.batizado{ border-color: var(--gold); }
@@ -109,10 +157,27 @@
     .insta-btn{position:fixed;bottom:100px;right:20px;background:var(--accent);padding:10px 14px;border-radius:40px;display:flex;align-items:center;gap:8px;color:white;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.12);z-index:9999}
     .insta-btn img{width:24px;height:24px;filter:brightness(0) invert(1)}
 
+    /* faixa rosa abaixo do header */
+    .header-banner{
+      width: 100%;
+      height: 60px;
+      background: linear-gradient(90deg, #e4b1c1, var(--accent));
+      background-size: 200% 200%;
+      animation: moveBg 6s ease infinite;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      margin-top:86px; /* empurra visualmente para não cobrir conteúdo */
+    }
+    @keyframes moveBg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     /* responsividade */
     @media(max-width:880px){
       header{padding:12px}
       .header-space{height:80px}
+      .header-banner{height:48px;margin-top:80px}
     }
   </style>
 </head>
@@ -129,7 +194,8 @@
     </nav>
   </header>
 
-  <div class="header-space"></div>
+  <!-- faixa rosé -->
+  <div class="header-banner" aria-hidden="true"></div>
 
   <div class="container">
     <div class="decor-flower" aria-hidden="true"></div>
@@ -176,18 +242,16 @@
       <div class="carousel-wrap" aria-label="Carrossel de toalhinhas">
         <button class="carousel-btn left" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
         <div class="carousel" data-carousel="toalhinhas">
-          <div class="carousel-item"><img src="fotos/toalhinha1.jpg" alt="Toalhinha 1" class="thumb"><p>Toalhinha 1</p></div>
-          <div class="carousel-item"><img src="fotos/toalhinha2.jpg" alt="Toalhinha 2" class="thumb"><p>Toalhinha 2</p></div>
-          <div class="carousel-item"><img src="fotos/toalhinha3.jpg" alt="Toalhinha 3" class="thumb"><p>Toalhinha 3</p></div>
-		<div class="carousel-item"><img src="fotos/toalhinha4.jpg" alt="Toalhinha 4" class="thumb"><p>Toalhinha 4</p></div>
-	<div class="carousel-item"><img src="fotos/toalhinha5.jpg" alt="Toalhinha 5" class="thumb"><p>Toalhinha 5</p></div>
-	<div class="carousel-item"><img src="fotos/toalhinha6.jpg" alt="Toalhinha 6" class="thumb"><p>Toalhinha 6</p></div>
-	<div class="carousel-item"><img src="fotos/toalhinha7.jpg" alt="Toalhinha 7" class="thumb"><p>Toalhinha 7</p></div>
-	<div class="carousel-item"><img src="fotos/toalhinha8.jpg" alt="Toalhinha 8" class="thumb"><p>Toalhinha 8</p></div>
-	<div class="carousel-item"><img src="fotos/toalhinha9.jpg" alt="Toalhinha 9" class="thumb"><p>Toalhinha 9</p></div>
-	<div class="carousel-item"><img src="fotos/toalhinha10.jpg" alt="Toalhinha 10" class="thumb"><p>Toalhinha 10</p></div>
-
-          <!-- copie mais .carousel-item para adicionar até 10+ imagens -->
+          <div class="carousel-item"><img src="fotos/toalhinha1.jpg" alt="Toalhinha 1" class="thumb" onclick="openLightbox(this.src)"><p>Toalhinha 1</p></div>
+          <div class="carousel-item"><img src="fotos/toalhinha2.jpg" alt="Toalhinha 2" class="thumb" onclick="openLightbox(this.src)"><p>Toalhinha 2</p></div>
+          <div class="carousel-item"><img src="fotos/toalhinha3.jpg" alt="Toalhinha 3" class="thumb" onclick="openLightbox(this.src)"><p>Toalhinha 3</p></div>
+          <div class="carousel-item"><img src="fotos/toalhinha4.jpg" alt="Toalhinha 4" class="thumb" onclick="openLightbox(this.src)"><p>Toalhinha 4</p></div>
+          <div class="carousel-item"><img src="fotos/toalhinha5.jpg" alt="Toalhinha 5" class="thumb" onclick="openLightbox(this.src)"><p>Toalhinha 5</p></div>
+          <div class="carousel-item"><img src="fotos/toalhinha6.jpg" alt="Toalhinha 6" class="thumb" onclick="openLightbox(this.src)"><p>Toalhinha 6</p></div>
+          <div class="carousel-item"><img src="fotos/toalhinha7.jpg" alt="Toalhinha 7" class="thumb" onclick="openLightbox(this.src)"><p>Toalhinha 7</p></div>
+          <div class="carousel-item"><img src="fotos/toalhinha8.jpg" alt="Toalhinha 8" class="thumb" onclick="openLightbox(this.src)"><p>Toalhinha 8</p></div>
+          <div class="carousel-item"><img src="fotos/toalhinha9.jpg" alt="Toalhinha 9" class="thumb" onclick="openLightbox(this.src)"><p>Toalhinha 9</p></div>
+          <div class="carousel-item"><img src="fotos/toalhinha10.jpg" alt="Toalhinha 10" class="thumb" onclick="openLightbox(this.src)"><p>Toalhinha 10</p></div>
         </div>
         <button class="carousel-btn right" aria-label="Próximo"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
       </div>
@@ -197,16 +261,16 @@
       <div class="carousel-wrap" aria-label="Carrossel Valletex">
         <button class="carousel-btn left" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
         <div class="carousel" data-carousel="valletex">
-          <div class="carousel-item"><img src="fotos/valletex1.jpg" alt="Valletex 1" class="thumb"><p>Valletex 1</p></div>
-          <div class="carousel-item"><img src="fotos/valletex2.jpg" alt="Valletex 2" class="thumb"><p>Valletex 2</p></div>
-          <div class="carousel-item"><img src="fotos/valletex3.jpg" alt="Valletex 3" class="thumb"><p>Valletex 3</p></div>
-	<div class="carousel-item"><img src="fotos/valletex4.jpg" alt="Valletex 4" class="thumb"><p>Valletex 4</p></div>
-	<div class="carousel-item"><img src="fotos/valletex5.jpg" alt="Valletex 5" class="thumb"><p>Valletex 5</p></div>
-	<div class="carousel-item"><img src="fotos/valletex6.jpg" alt="Valletex 6" class="thumb"><p>Valletex 6</p></div>
-	<div class="carousel-item"><img src="fotos/valletex7.jpg" alt="Valletex 7" class="thumb"><p>Valletex 7</p></div>
-	<div class="carousel-item"><img src="fotos/valletex8.jpg" alt="Valletex 8" class="thumb"><p>Valletex 8</p></div>
-	<div class="carousel-item"><img src="fotos/valletex9.jpg" alt="Valletex 9" class="thumb"><p>Valletex 9</p></div>
-	<div class="carousel-item"><img src="fotos/valletex10.jpg" alt="Valletex 10" class="thumb"><p>Valletex 10</p></div>
+          <div class="carousel-item"><img src="fotos/valletex1.jpg" alt="Valletex 1" class="thumb" onclick="openLightbox(this.src)"><p>Valletex 1</p></div>
+          <div class="carousel-item"><img src="fotos/valletex2.jpg" alt="Valletex 2" class="thumb" onclick="openLightbox(this.src)"><p>Valletex 2</p></div>
+          <div class="carousel-item"><img src="fotos/valletex3.jpg" alt="Valletex 3" class="thumb" onclick="openLightbox(this.src)"><p>Valletex 3</p></div>
+          <div class="carousel-item"><img src="fotos/valletex4.jpg" alt="Valletex 4" class="thumb" onclick="openLightbox(this.src)"><p>Valletex 4</p></div>
+          <div class="carousel-item"><img src="fotos/valletex5.jpg" alt="Valletex 5" class="thumb" onclick="openLightbox(this.src)"><p>Valletex 5</p></div>
+          <div class="carousel-item"><img src="fotos/valletex6.jpg" alt="Valletex 6" class="thumb" onclick="openLightbox(this.src)"><p>Valletex 6</p></div>
+          <div class="carousel-item"><img src="fotos/valletex7.jpg" alt="Valletex 7" class="thumb" onclick="openLightbox(this.src)"><p>Valletex 7</p></div>
+          <div class="carousel-item"><img src="fotos/valletex8.jpg" alt="Valletex 8" class="thumb" onclick="openLightbox(this.src)"><p>Valletex 8</p></div>
+          <div class="carousel-item"><img src="fotos/valletex9.jpg" alt="Valletex 9" class="thumb" onclick="openLightbox(this.src)"><p>Valletex 9</p></div>
+          <div class="carousel-item"><img src="fotos/valletex10.jpg" alt="Valletex 10" class="thumb" onclick="openLightbox(this.src)"><p>Valletex 10</p></div>
         </div>
         <button class="carousel-btn right" aria-label="Próximo"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
       </div>
@@ -216,16 +280,16 @@
       <div class="carousel-wrap" aria-label="Carrossel Cremer">
         <button class="carousel-btn left" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
         <div class="carousel" data-carousel="cremer">
-          <div class="carousel-item"><img src="fotos/cremer1.jpg" alt="Cremer 1" class="thumb"><p>Cremer 1</p></div>
-          <div class="carousel-item"><img src="fotos/cremer2.jpg" alt="Cremer 2" class="thumb"><p>Cremer 2</p></div>
-          <div class="carousel-item"><img src="fotos/cremer3.jpg" alt="Cremer 3" class="thumb"><p>Cremer 3</p></div>
-	<div class="carousel-item"><img src="fotos/cremer4.jpg" alt="Cremer 4" class="thumb"><p>Cremer 4</p></div>
-	<div class="carousel-item"><img src="fotos/cremer5.jpg" alt="Cremer 5" class="thumb"><p>Cremer 5</p></div>
-	<div class="carousel-item"><img src="fotos/cremer6.jpg" alt="Cremer 6" class="thumb"><p>Cremer 6</p></div>
-	<div class="carousel-item"><img src="fotos/cremer7.jpg" alt="Cremer 7" class="thumb"><p>Cremer 7</p></div>
-	<div class="carousel-item"><img src="fotos/cremer8.jpg" alt="Cremer 8" class="thumb"><p>Cremer 8</p></div>
-	<div class="carousel-item"><img src="fotos/cremer9.jpg" alt="Cremer 9" class="thumb"><p>Cremer 9</p></div>
-	<div class="carousel-item"><img src="fotos/cremer10.jpg" alt="Cremer 10" class="thumb"><p>Cremer 10</p></div>
+          <div class="carousel-item"><img src="fotos/cremer1.jpg" alt="Cremer 1" class="thumb" onclick="openLightbox(this.src)"><p>Cremer 1</p></div>
+          <div class="carousel-item"><img src="fotos/cremer2.jpg" alt="Cremer 2" class="thumb" onclick="openLightbox(this.src)"><p>Cremer 2</p></div>
+          <div class="carousel-item"><img src="fotos/cremer3.jpg" alt="Cremer 3" class="thumb" onclick="openLightbox(this.src)"><p>Cremer 3</p></div>
+          <div class="carousel-item"><img src="fotos/cremer4.jpg" alt="Cremer 4" class="thumb" onclick="openLightbox(this.src)"><p>Cremer 4</p></div>
+          <div class="carousel-item"><img src="fotos/cremer5.jpg" alt="Cremer 5" class="thumb" onclick="openLightbox(this.src)"><p>Cremer 5</p></div>
+          <div class="carousel-item"><img src="fotos/cremer6.jpg" alt="Cremer 6" class="thumb" onclick="openLightbox(this.src)"><p>Cremer 6</p></div>
+          <div class="carousel-item"><img src="fotos/cremer7.jpg" alt="Cremer 7" class="thumb" onclick="openLightbox(this.src)"><p>Cremer 7</p></div>
+          <div class="carousel-item"><img src="fotos/cremer8.jpg" alt="Cremer 8" class="thumb" onclick="openLightbox(this.src)"><p>Cremer 8</p></div>
+          <div class="carousel-item"><img src="fotos/cremer9.jpg" alt="Cremer 9" class="thumb" onclick="openLightbox(this.src)"><p>Cremer 9</p></div>
+          <div class="carousel-item"><img src="fotos/cremer10.jpg" alt="Cremer 10" class="thumb" onclick="openLightbox(this.src)"><p>Cremer 10</p></div>
         </div>
         <button class="carousel-btn right" aria-label="Próximo"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
       </div>
@@ -235,16 +299,16 @@
       <div class="carousel-wrap" aria-label="Carrossel Batizado">
         <button class="carousel-btn left" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
         <div class="carousel" data-carousel="batizado">
-          <div class="carousel-item"><img src="fotos/batizado1.jpg" alt="Batizado 1" class="thumb batizado"><p>Batizado 1</p></div>
-          <div class="carousel-item"><img src="fotos/batizado2.jpg" alt="Batizado 2" class="thumb batizado"><p>Batizado 2</p></div>
-          <div class="carousel-item"><img src="fotos/batizado3.jpg" alt="Batizado 3" class="thumb batizado"><p>Batizado 3</p></div>
-	<div class="carousel-item"><img src="fotos/batizado4.jpg" alt="Batizado 4" class="thumb batizado"><p>Batizado 4</p></div>
-	<div class="carousel-item"><img src="fotos/batizado5.jpg" alt="Batizado 5" class="thumb batizado"><p>Batizado 5</p></div>
-	<div class="carousel-item"><img src="fotos/batizado6.jpg" alt="Batizado 6" class="thumb batizado"><p>Batizado 6</p></div>
-	<div class="carousel-item"><img src="fotos/batizado7.jpg" alt="Batizado 7" class="thumb batizado"><p>Batizado 7</p></div>
-	<div class="carousel-item"><img src="fotos/batizado8.jpg" alt="Batizado 8" class="thumb batizado"><p>Batizado 8</p></div>
-	<div class="carousel-item"><img src="fotos/batizado9.jpg" alt="Batizado 9" class="thumb batizado"><p>Batizado 9</p></div>
-	<div class="carousel-item"><img src="fotos/batizado10.jpg" alt="Batizado 10" class="thumb batizado"><p>Batizado 10</p></div>
+          <div class="carousel-item"><img src="fotos/batizado1.jpg" alt="Batizado 1" class="thumb batizado" onclick="openLightbox(this.src)"><p>Batizado 1</p></div>
+          <div class="carousel-item"><img src="fotos/batizado2.jpg" alt="Batizado 2" class="thumb batizado" onclick="openLightbox(this.src)"><p>Batizado 2</p></div>
+          <div class="carousel-item"><img src="fotos/batizado3.jpg" alt="Batizado 3" class="thumb batizado" onclick="openLightbox(this.src)"><p>Batizado 3</p></div>
+          <div class="carousel-item"><img src="fotos/batizado4.jpg" alt="Batizado 4" class="thumb batizado" onclick="openLightbox(this.src)"><p>Batizado 4</p></div>
+          <div class="carousel-item"><img src="fotos/batizado5.jpg" alt="Batizado 5" class="thumb batizado" onclick="openLightbox(this.src)"><p>Batizado 5</p></div>
+          <div class="carousel-item"><img src="fotos/batizado6.jpg" alt="Batizado 6" class="thumb batizado" onclick="openLightbox(this.src)"><p>Batizado 6</p></div>
+          <div class="carousel-item"><img src="fotos/batizado7.jpg" alt="Batizado 7" class="thumb batizado" onclick="openLightbox(this.src)"><p>Batizado 7</p></div>
+          <div class="carousel-item"><img src="fotos/batizado8.jpg" alt="Batizado 8" class="thumb batizado" onclick="openLightbox(this.src)"><p>Batizado 8</p></div>
+          <div class="carousel-item"><img src="fotos/batizado9.jpg" alt="Batizado 9" class="thumb batizado" onclick="openLightbox(this.src)"><p>Batizado 9</p></div>
+          <div class="carousel-item"><img src="fotos/batizado10.jpg" alt="Batizado 10" class="thumb batizado" onclick="openLightbox(this.src)"><p>Batizado 10</p></div>
         </div>
         <button class="carousel-btn right" aria-label="Próximo"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
       </div>
@@ -293,6 +357,11 @@
 
   </div> <!-- container -->
 
+  <!-- LIGHTBOX HTML (no final do body) -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Foto ampliada">
+  </div>
+
   <!-- SCRIPTS -->
   <script>
     // atualiza o ano no rodapé
@@ -316,32 +385,43 @@
       });
     });
 
+    // LIGHTBOX functions
+    function openLightbox(src) {
+      document.getElementById("lightbox-img").src = src;
+      document.getElementById("lightbox").style.display = "flex";
+    }
+    function closeLightbox() {
+      document.getElementById("lightbox").style.display = "none";
+    }
+
     // carrossel - setas e arrastar com mouse
     (function(){
       // funções utilitárias
       function scrollByStep(car, step){
-        const itemWidth = car.querySelector('.carousel-item') ? car.querySelector('.carousel-item').getBoundingClientRect().width + 16 : 220;
+        const item = car.querySelector('.carousel-item');
+        const itemWidth = item ? item.getBoundingClientRect().width + parseInt(getComputedStyle(car).gap || 16) : 220;
         car.scrollBy({ left: step * (itemWidth), behavior: 'smooth' });
       }
 
       document.querySelectorAll('.carousel-wrap').forEach(wrap=>{
         const car = wrap.querySelector('.carousel');
+        if(!car) return;
         const btnLeft = wrap.querySelector('.carousel-btn.left');
         const btnRight = wrap.querySelector('.carousel-btn.right');
 
-        if(btnLeft && btnRight && car){
+        if(btnLeft && btnRight){
           btnLeft.addEventListener('click', ()=> scrollByStep(car, -1));
           btnRight.addEventListener('click', ()=> scrollByStep(car, 1));
         }
 
         // enable dragging with mouse
-        let isDown=false, startX, scrollLeft;
+        let isDown=false, startX=0, scrollLeft=0;
         car.addEventListener('mousedown', e => { isDown=true; car.classList.add('active'); startX = e.pageX - car.offsetLeft; scrollLeft = car.scrollLeft; });
         car.addEventListener('mouseleave', ()=>{ isDown=false; car.classList.remove('active'); });
         car.addEventListener('mouseup', ()=>{ isDown=false; car.classList.remove('active'); });
         car.addEventListener('mousemove', e => { if(!isDown) return; e.preventDefault(); const x = e.pageX - car.offsetLeft; const walk = (x - startX) * 1; car.scrollLeft = scrollLeft - walk; });
 
-        // touch support: small inertia on swipe implemented natively by browser; no extra code needed
+        // touch support: handled by browser (native)
       });
     })();
   </script>
