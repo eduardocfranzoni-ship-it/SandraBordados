@@ -1322,41 +1322,49 @@ footer {
   }
 
   header .header-inner {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto 1fr auto;
     gap: 12px;
+    align-items: center;
   }
 
+  /* Hamburger à esquerda */
   .header-left {
-    display: none;
-  }
-
-  .header-right .btn {
-    display: none;
-  }
-
-  .header-right {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    order: 1;
   }
 
   .hamburger {
     display: flex;
   }
 
+  /* Brand centralizado */
   .brand-wrapper {
-    justify-self: flex-start;
+    justify-self: center;
+    order: 2;
   }
 
   .brand {
-    font-size: 1.3rem;
-    padding: 4px 12px;
+    font-size: 1.2rem;
+    padding: 4px 8px;
   }
 
   .brand::before,
   .brand::after {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
+  /* Botões escondidos, apenas hamburger visível */
+  .header-right {
+    order: 3;
+    justify-content: flex-end;
+  }
+
+  .header-right .btn {
+    display: none;
+  }
+
+  /* Esconder menu desktop */
   .desktop-nav {
     display: none;
   }
