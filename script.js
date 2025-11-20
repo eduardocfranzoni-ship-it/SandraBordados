@@ -8,6 +8,68 @@
 document.getElementById('ano').textContent = new Date().getFullYear();
 
 // ========================================
+// ANIMAÇÕES AO ROLAR (SCROLL ANIMATIONS)
+// ========================================
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animated');
+      observer.unobserve(entry.target); // Para animar apenas uma vez
+    }
+  });
+}, observerOptions);
+
+// Observar todos os elementos com a classe animate-on-scroll
+document.addEventListener('DOMContentLoaded', () => {
+  const animatedElements = document.querySelectorAll('.animate-on-scroll');
+  animatedElements.forEach(el => observer.observe(el));
+});
+
+// ========================================
+// MENU MOBILE HAMBURGUER
+// ========================================
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+// Abrir menu
+hamburger?.addEventListener('click', () => {
+  mobileMenu.classList.add('active');
+  hamburger.classList.add('active');
+  document.body.style.overflow = 'hidden'; // Prevenir scroll
+});
+
+// Fechar menu - botão X
+mobileClose?.addEventListener('click', () => {
+  mobileMenu.classList.remove('active');
+  hamburger.classList.remove('active');
+  document.body.style.overflow = '';
+});
+
+// Fechar menu - click no overlay
+mobileMenuOverlay?.addEventListener('click', () => {
+  mobileMenu.classList.remove('active');
+  hamburger.classList.remove('active');
+  document.body.style.overflow = '';
+});
+
+// Fechar menu ao clicar em um link
+mobileNavLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+    hamburger.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+});
+
+// ========================================
 // FAKE SUBMIT DO FORMULÁRIO
 // ========================================
 function fakeSubmit(e) {
