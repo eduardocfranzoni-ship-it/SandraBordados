@@ -101,12 +101,13 @@ body {
 header {
   position: relative;
   width: 100%;
-  background: rgba(255,204,225,0.95);
-  backdrop-filter: blur(4px);
-  padding: 0 28px;
-  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  background: linear-gradient(135deg, #ffe4f0 0%, #ffd9e8 50%, #ffcee0 100%);
+  backdrop-filter: blur(8px);
+  padding: 0 40px;
+  box-shadow: 0 4px 20px rgba(179,71,143,0.15), 0 1px 3px rgba(0,0,0,0.05);
   z-index: 10000;
-  height: 88px;
+  min-height: 100px;
+  border-bottom: 2px solid rgba(179,71,143,0.1);
 }
 
 /* Layout interno do header: usa grid para garantir centro exato */
@@ -135,11 +136,37 @@ header .header-right {
 
 /* Marca centralizada */
 .brand {
-  font-weight: 800;
-  font-size: 1.6rem;
-  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, #b3478f 0%, #d4578f 50%, #b3478f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-align: center;
   justify-self: center;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 10px rgba(179,71,143,0.1);
+  position: relative;
+  padding: 8px 20px;
+}
+
+.brand::before {
+  content: '✿';
+  position: absolute;
+  left: -5px;
+  color: #d4578f;
+  font-size: 1.2rem;
+  opacity: 0.6;
+}
+
+.brand::after {
+  content: '✿';
+  position: absolute;
+  right: -5px;
+  color: #d4578f;
+  font-size: 1.2rem;
+  opacity: 0.6;
 }
 
 .brand-wrapper {
@@ -153,20 +180,49 @@ header .header-right {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 8px 0;
+  padding: 12px 0 16px 0;
   background: transparent;
 }
 
 .nav-links {
   display: flex;
-  gap: 18px;
+  gap: 32px;
   align-items: center;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #444;
+  color: #5a3649;
   font-weight: 600;
+  font-size: 1rem;
+  position: relative;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+}
+
+.nav-links a::before {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transition: transform 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+  background: rgba(179,71,143,0.08);
+  transform: translateY(-2px);
+}
+
+.nav-links a:hover::before {
+  transform: translateX(-50%) scaleX(1);
 }
 
 /* Espaço reservado para header + faixa (removido - header não é mais fixo) */
@@ -179,14 +235,15 @@ header .header-right {
    ======================================== */
 .faixa {
   position: relative;
-  background: linear-gradient(90deg, rgba(179,71,143,0.06), rgba(255,210,230,0.08));
-  border-top: 1px solid rgba(179,71,143,0.06);
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-  padding: 10px 0;
+  background: linear-gradient(90deg, rgba(179,71,143,0.08) 0%, rgba(255,210,230,0.12) 50%, rgba(179,71,143,0.08) 100%);
+  border-top: 2px solid rgba(255,255,255,0.5);
+  border-bottom: 1px solid rgba(179,71,143,0.15);
+  padding: 14px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   pointer-events: none;
+  box-shadow: 0 2px 10px rgba(179,71,143,0.08);
 }
 
 .faixa .faixa-inner {
@@ -231,29 +288,55 @@ header .header-right {
    ======================================== */
 .btn {
   display: inline-block;
-  padding: 9px 14px;
-  border-radius: 8px;
+  padding: 12px 24px;
+  border-radius: 25px;
   text-decoration: none;
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent) 0%, #c9589a 100%);
   color: white;
   font-weight: 600;
-  transition: .18s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(179,71,143,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s ease;
 }
 
 .btn:hover {
-  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(179,71,143,0.4);
+}
+
+.btn:hover::before {
+  left: 100%;
 }
 
 .btn-small {
-  padding: 8px 12px;
-  font-size: 0.85rem;
+  padding: 10px 20px;
+  font-size: 0.9rem;
 }
 
 .btn-outline {
-  background: #ffd9e8;
-  color: #b3478f;
-  border: 2px solid rgba(179,71,143,0.15);
+  background: white;
+  color: var(--accent);
+  border: 2px solid var(--accent);
   font-weight: 700;
+  box-shadow: 0 4px 15px rgba(179,71,143,0.2);
+}
+
+.btn-outline:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
 }
 
 /* ========================================
@@ -556,11 +639,69 @@ footer {
 
 @media (max-width: 880px) {
   header {
-    padding: 0 12px;
+    padding: 0 20px;
+  }
+
+  .nav-links {
+    gap: 20px;
+  }
+
+  .nav-links a {
+    padding: 6px 12px;
+    font-size: 0.95rem;
+  }
+
+  .brand {
+    font-size: 1.5rem;
+    padding: 6px 16px;
   }
 }
 
 @media (max-width: 720px) {
+  header {
+    min-height: auto;
+    padding: 12px 16px;
+  }
+
+  header .header-inner {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .header-left,
+  .header-right {
+    display: none;
+  }
+
+  .brand-wrapper {
+    justify-self: center;
+  }
+
+  .brand {
+    font-size: 1.3rem;
+    padding: 4px 12px;
+  }
+
+  .brand::before,
+  .brand::after {
+    font-size: 1rem;
+  }
+
+  .main-nav {
+    padding: 8px 0 12px 0;
+  }
+
+  .nav-links {
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-links a {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+
   .top-banner {
     flex-direction: column;
     align-items: flex-start;
@@ -569,8 +710,23 @@ footer {
   .top-banner .txt {
     font-size: 1.05rem;
   }
+}
 
+@media (max-width: 480px) {
   header {
-    height: 80px;
+    padding: 10px 12px;
+  }
+
+  .brand {
+    font-size: 1.1rem;
+  }
+
+  .nav-links {
+    gap: 8px;
+  }
+
+  .nav-links a {
+    padding: 5px 8px;
+    font-size: 0.8rem;
   }
 }
