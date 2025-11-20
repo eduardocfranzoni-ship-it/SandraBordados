@@ -726,16 +726,34 @@ label:nth-of-type(2)::before {
    CATÁLOGO
    ======================================== */
 .catalogo-carousel-wrap {
+  position: relative;
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .catalogo-carousel {
-  padding: 20px 10px;
+  display: flex;
+  overflow-x: auto;
+  gap: 24px;
+  padding: 12px 6px 18px 6px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.catalogo-carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.catalogo-carousel::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 10px;
 }
 
 .catalogo-carousel-item {
-  width: 320px;
-  flex-shrink: 0;
+  flex: 0 0 auto;
+  width: 300px;
+  scroll-snap-align: start;
 }
 
 .catalogo-item {
