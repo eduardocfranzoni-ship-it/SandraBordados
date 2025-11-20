@@ -1,0 +1,594 @@
+/* ========================================
+   SANDRA MARCIA BORDADOS - ESTILOS
+   ======================================== */
+
+/* ========================================
+   VARIÁVEIS CSS
+   ======================================== */
+:root {
+  --bg: #f7f7fb;
+  --accent: #b3478f; /* rosé principal */
+  --muted: #e4b1c1;  /* rosa suave para molduras */
+  --gold: #d4b36a;   /* dourado suave para Batizado */
+  --card-shadow: 0 6px 18px rgba(20,20,50,.04);
+}
+
+/* ========================================
+   RESET BÁSICO
+   ======================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ========================================
+   BODY E BACKGROUND
+   ======================================== */
+body {
+  font-family: Inter, system-ui, Arial, sans-serif;
+  line-height: 1.6;
+  color: #222;
+  background-color: #fdf6fa;
+
+  /* textura leve */
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(225,138,183,0.07) 0 6px, transparent 7px),
+    radial-gradient(circle at 86% 22%, rgba(179,71,143,0.05) 0 8px, transparent 9px),
+    radial-gradient(circle at 24% 72%, rgba(196,150,179,0.05) 0 6px, transparent 7px),
+    radial-gradient(circle at 74% 78%, rgba(225,138,183,0.06) 0 7px, transparent 8px),
+    repeating-linear-gradient(135deg, rgba(179,71,143,0.04) 0 2px, rgba(179,71,143,0) 2px 20px),
+    linear-gradient(180deg, #fff7fc, #f8eef5 60%);
+  background-repeat: repeat;
+  background-size: 220px 220px, 220px 220px, 180px 180px, 180px 180px, 28px 28px, cover;
+  background-attachment: fixed;
+  background-position: center;
+  scroll-behavior: smooth;
+}
+
+/* ========================================
+   SKIP LINK (ACESSIBILIDADE)
+   ======================================== */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ========================================
+   LIGHTBOX
+   ======================================== */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.4);
+  animation: fadeZoom .25s ease;
+  border: 5px solid #fff;
+  background: #fff;
+}
+
+@keyframes fadeZoom {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ========================================
+   HEADER FIXO
+   ======================================== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255,204,225,0.95);
+  backdrop-filter: blur(4px);
+  padding: 0 28px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  z-index: 10000;
+  height: 88px;
+}
+
+/* Layout interno do header: usa grid para garantir centro exato */
+header .header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+}
+
+header .header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+header .header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Marca centralizada */
+.brand {
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--accent);
+  text-align: center;
+  justify-self: center;
+}
+
+.brand-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Menu de navegação */
+.main-nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+  background: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 600;
+}
+
+/* Espaço reservado para header + faixa */
+.header-space {
+  height: 132px; /* 88 (header) + 44 (faixa) = 132 */
+}
+
+/* ========================================
+   FAIXA ROSÉ FIXA
+   ======================================== */
+.faixa {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 88px;
+  z-index: 9999;
+  background: linear-gradient(90deg, rgba(179,71,143,0.06), rgba(255,210,230,0.08));
+  border-top: 1px solid rgba(179,71,143,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.faixa .faixa-inner {
+  pointer-events: auto;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: 'Playfair Display', serif;
+}
+
+/* ========================================
+   CONTAINER E LAYOUT
+   ======================================== */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 18px;
+}
+
+/* ========================================
+   CARDS E GRID
+   ======================================== */
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: var(--card-shadow);
+  margin-top: 22px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 14px;
+}
+
+/* ========================================
+   BOTÕES
+   ======================================== */
+.btn {
+  display: inline-block;
+  padding: 9px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+  transition: .18s;
+}
+
+.btn:hover {
+  filter: brightness(1.08);
+}
+
+.btn-small {
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+
+.btn-outline {
+  background: #ffd9e8;
+  color: #b3478f;
+  border: 2px solid rgba(179,71,143,0.15);
+  font-weight: 700;
+}
+
+/* ========================================
+   FORMULÁRIOS
+   ======================================== */
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+label {
+  margin-top: 8px;
+  display: block;
+}
+
+.form-submit {
+  margin-top: 10px;
+}
+
+/* ========================================
+   BANNER TOPO
+   ======================================== */
+.top-banner {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  background: transparent;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.top-banner .txt {
+  font-family: 'Playfair Display', serif;
+  color: var(--accent);
+  font-size: 1.4rem;
+}
+
+.top-banner-label {
+  font-size: 1rem;
+  color: #b3478f;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+}
+
+.top-banner h3 {
+  margin: 6px 0 0;
+  font-family: 'Playfair Display', serif;
+  color: var(--accent);
+}
+
+.top-banner p {
+  margin: 6px 0 0;
+  font-size: 0.95rem;
+  color: #6b4b5e;
+}
+
+/* ========================================
+   TÍTULOS DE SEÇÃO
+   ======================================== */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Playfair Display', serif;
+  color: var(--accent);
+  font-size: 1.3rem;
+  margin: 0 0 10px 0;
+  position: relative;
+  padding-bottom: 14px;
+}
+
+.section-title .dec-icon {
+  width: 36px;
+  height: 36px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #fff, #fdeef3);
+  box-shadow: 0 4px 10px rgba(179,71,143,0.10);
+}
+
+.section-subtitle {
+  color: var(--accent);
+  margin-top: 18px;
+  margin-bottom: 10px;
+}
+
+/* ========================================
+   IMAGENS E THUMBNAILS
+   ======================================== */
+.thumb {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+  margin: auto;
+  border: 4px solid var(--muted);
+  cursor: pointer;
+  transition: transform .18s, box-shadow .18s;
+}
+
+.thumb:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.thumb.batizado {
+  border-color: var(--gold);
+}
+
+/* ========================================
+   CARROSSEL HORIZONTAL
+   ======================================== */
+.carousel-wrap {
+  position: relative;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 12px 6px 18px 6px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 10px;
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+  width: 200px;
+  scroll-snap-align: start;
+  text-align: center;
+}
+
+.carousel-item p {
+  margin-top: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+  border: none;
+  cursor: pointer;
+}
+
+.carousel-btn.left {
+  left: 6px;
+}
+
+.carousel-btn.right {
+  right: 6px;
+}
+
+.carousel-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--accent);
+  stroke-width: 2;
+  fill: none;
+}
+
+/* ========================================
+   CATÁLOGO
+   ======================================== */
+.catalogo-grid {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.catalogo-item {
+  flex: 1 1 30%;
+  min-width: 240px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: var(--card-shadow);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.catalogo-item img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.catalogo-item h3 {
+  margin: 0;
+  font-weight: 700;
+}
+
+.catalogo-item .price {
+  font-weight: 600;
+  color: #444;
+  margin-top: 6px;
+}
+
+.catalogo-item .btn {
+  margin-top: auto;
+}
+
+/* ========================================
+   BOTÕES FLUTUANTES
+   ======================================== */
+.whats-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 64px;
+  height: 64px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,.18);
+  z-index: 9999;
+}
+
+.whats-btn img {
+  width: 32px;
+  height: 32px;
+}
+
+.insta-btn {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  background: var(--accent);
+  padding: 10px 14px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+  z-index: 9999;
+}
+
+.insta-btn img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+}
+
+/* ========================================
+   RODAPÉ
+   ======================================== */
+footer {
+  margin-top: 22px;
+  text-align: center;
+  color: #777;
+  padding: 16px 0;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+@media (min-width: 1000px) {
+  .decor-flower {
+    display: block;
+  }
+}
+
+@media (max-width: 880px) {
+  header {
+    padding: 0 12px;
+  }
+
+  .header-space {
+    height: 120px;
+  }
+}
+
+@media (max-width: 720px) {
+  .top-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .top-banner .txt {
+    font-size: 1.05rem;
+  }
+
+  header {
+    height: 80px;
+  }
+
+  .faixa {
+    top: 80px;
+  }
+
+  .header-space {
+    height: 124px; /* 80 + 44 */
+  }
+}
