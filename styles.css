@@ -856,6 +856,19 @@ label:nth-of-type(2)::before {
   }
 }
 
+@keyframes pulseInsta {
+  0% {
+    box-shadow: 0 0 0 0 #bc1888;
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37,211,102,0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37,211,102,0);
+  }
+}
+
+
 @keyframes float {
   0%, 100% {
     transform: translateY(0);
@@ -885,7 +898,7 @@ label:nth-of-type(2)::before {
 
 .whats-btn:hover {
   transform: scale(1.15) rotate(5deg);
-  box-shadow: 0 12px 35px rgba(37,211,102,0.6);
+  /* box-shadow: 0 12px 35px rgba(37,211,102,0.6); */
 }
 
 .whats-btn img {
@@ -895,10 +908,12 @@ label:nth-of-type(2)::before {
 
 .insta-btn {
   position: fixed;
+  width: 70px;
+  height: 70px;
   bottom: 110px;
   right: 20px;
   background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-  padding: 12px 18px;
+  padding: 12px 16px;
   border-radius: 40px;
   display: flex;
   align-items: center;
@@ -906,11 +921,13 @@ label:nth-of-type(2)::before {
   color: white;
   text-decoration: none;
   font-weight: 700;
-  box-shadow: 0 8px 25px rgba(188,24,136,0.4);
+  /* box-shadow: 0 8px 25px rgba(188,24,136,0.4); */
   z-index: 9999;
   transition: all 0.3s ease;
   border: 2px solid white;
-  animation: float 3s ease-in-out infinite 0.5s;
+  animation: pulseInsta 2s infinite, float 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+  border: 3px solid white;
 }
 
 .insta-btn:hover {
@@ -919,8 +936,8 @@ label:nth-of-type(2)::before {
 }
 
 .insta-btn svg {
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
   flex-shrink: 0;
 }
 
