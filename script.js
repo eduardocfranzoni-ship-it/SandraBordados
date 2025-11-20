@@ -24,7 +24,6 @@ function fakeSubmit(e) {
 // ========================================
 // SMOOTH SCROLL PARA LINKS INTERNOS
 // ========================================
-// Considera header + faixa = 132px
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', function(e) {
     const href = this.getAttribute('href');
@@ -33,7 +32,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     const target = document.querySelector(href);
     if (target) {
       e.preventDefault();
-      const y = target.getBoundingClientRect().top + window.scrollY - 132;
+      const y = target.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   });

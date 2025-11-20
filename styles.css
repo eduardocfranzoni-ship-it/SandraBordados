@@ -96,12 +96,10 @@ body {
 }
 
 /* ========================================
-   HEADER FIXO
+   HEADER
    ======================================== */
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   background: rgba(255,204,225,0.95);
   backdrop-filter: blur(4px);
@@ -171,20 +169,16 @@ header .header-right {
   font-weight: 600;
 }
 
-/* Espaço reservado para header + faixa */
+/* Espaço reservado para header + faixa (removido - header não é mais fixo) */
 .header-space {
-  height: 132px; /* 88 (header) + 44 (faixa) = 132 */
+  display: none;
 }
 
 /* ========================================
-   FAIXA ROSÉ FIXA
+   FAIXA ROSÉ
    ======================================== */
 .faixa {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 88px;
-  z-index: 9999;
+  position: relative;
   background: linear-gradient(90deg, rgba(179,71,143,0.06), rgba(255,210,230,0.08));
   border-top: 1px solid rgba(179,71,143,0.06);
   border-bottom: 1px solid rgba(255,255,255,0.12);
@@ -564,10 +558,6 @@ footer {
   header {
     padding: 0 12px;
   }
-
-  .header-space {
-    height: 120px;
-  }
 }
 
 @media (max-width: 720px) {
@@ -582,13 +572,5 @@ footer {
 
   header {
     height: 80px;
-  }
-
-  .faixa {
-    top: 80px;
-  }
-
-  .header-space {
-    height: 124px; /* 80 + 44 */
   }
 }
