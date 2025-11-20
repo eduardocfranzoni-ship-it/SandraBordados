@@ -895,10 +895,10 @@ label:nth-of-type(2)::before {
   box-shadow: 0 12px 35px rgba(188,24,136,0.6);
 }
 
-.insta-btn img {
+.insta-btn svg {
   width: 26px;
   height: 26px;
-  filter: brightness(0) invert(1);
+  flex-shrink: 0;
 }
 
 /* ========================================
