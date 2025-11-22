@@ -70,14 +70,36 @@ mobileNavLinks.forEach(link => {
 });
 
 // ========================================
-// FAKE SUBMIT DO FORMULÁRIO
+// SUBMIT DO FORMULÁRIO - REDIRECIONA PARA WHATSAPP
 // ========================================
 function fakeSubmit(e) {
   e.preventDefault();
-  const nome = document.getElementById('f_nome')?.value || '';
-  alert('Obrigado, ' + (nome ? nome + '!' : '') + ' Sua mensagem foi recebida. Entrarei em contato em breve.');
 
-  // Limpa os campos
+  const nome = document.getElementById('f_nome')?.value || '';
+  const email = document.getElementById('f_email')?.value || '';
+  const mensagem = document.getElementById('f_msg')?.value || '';
+
+  // Formata a mensagem para WhatsApp
+  let textoWhatsApp = `Olá! Vim através do site.\n\n`;
+  textoWhatsApp += `*Nome:* ${nome}\n`;
+  textoWhatsApp += `*Email:* ${email}\n`;
+  if (mensagem) {
+    textoWhatsApp += `*Mensagem:* ${mensagem}`;
+  }
+
+  // Codifica a mensagem para URL
+  const mensagemCodificada = encodeURIComponent(textoWhatsApp);
+
+  // Número do WhatsApp (mesmo do botão flutuante)
+  const numeroWhatsApp = '5516991123346';
+
+  // Cria a URL do WhatsApp
+  const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
+
+  // Abre o WhatsApp em nova aba
+  window.open(urlWhatsApp, '_blank');
+
+  // Limpa os campos após enviar
   if (document.getElementById('f_nome')) document.getElementById('f_nome').value = '';
   if (document.getElementById('f_email')) document.getElementById('f_email').value = '';
   if (document.getElementById('f_msg')) document.getElementById('f_msg').value = '';
@@ -194,4 +216,103 @@ function escClose(e) {
     // Garantir que carrossel é focável pelo teclado
     car.setAttribute('tabindex', '0');
   });
+})();
+
+// ========================================
+// OPÇÃO 1: SISTEMA DE ABAS - GALERIA
+// ========================================
+(function() {
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  if (tabButtons.length > 0) {
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetTab = btn.getAttribute('data-tab');
+
+        // Remove active de todos os botões e painéis
+        tabButtons.forEach(b => b.classList.remove('active'));
+        tabPanels.forEach(p => p.classList.remove('active'));
+
+        // Adiciona active no botão clicado
+        btn.classList.add('active');
+
+        // Adiciona active no painel correspondente
+        const targetPanel = document.getElementById('tab-' + targetTab);
+        if (targetPanel) {
+          targetPanel.classList.add('active');
+        }
+      });
+    });
+  }
+})();
+
+// ========================================
+// OPÇÃO 3: SISTEMA DE ACORDEÃO - GALERIA (DESATIVADO)
+// ========================================
+(function() {
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+  if (accordionHeaders.length > 0) {
+    accordionHeaders.forEach(header => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        const isActive = header.classList.contains('active');
+
+        // Toggle do acordeão clicado
+        if (isActive) {
+          header.classList.remove('active');
+          content.classList.remove('active');
+        } else {
+          header.classList.add('active');
+          content.classList.add('active');
+        }
+      });
+    });
+  }
+})();
+
+// ========================================
+// OPÇÃO 2: SISTEMA DE FILTROS - GALERIA
+// ========================================
+(function() {
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const photoItems = document.querySelectorAll('.photo-item');
+
+  if (filterButtons.length > 0) {
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        // Remove active de todos os botões
+        filterButtons.forEach(b => b.classList.remove('active'));
+
+        // Adiciona active no botão clicado
+        btn.classList.add('active');
+
+        // Filtra as fotos
+        photoItems.forEach(item => {
+          const category = item.getAttribute('data-category');
+
+          if (filter === 'all') {
+            item.classList.remove('hide');
+            // Reinicia animação
+            item.style.animation = 'none';
+            setTimeout(() => {
+              item.style.animation = 'fadeInGrid 0.5s ease';
+            }, 10);
+          } else if (category === filter) {
+            item.classList.remove('hide');
+            // Reinicia animação
+            item.style.animation = 'none';
+            setTimeout(() => {
+              item.style.animation = 'fadeInGrid 0.5s ease';
+            }, 10);
+          } else {
+            item.classList.add('hide');
+          }
+        });
+      });
+    });
+  }
 })();
