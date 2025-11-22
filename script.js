@@ -273,6 +273,30 @@ function escClose(e) {
 })();
 
 // ========================================
+// CARROSSEL PREMIUM - NAVEGAÇÃO
+// ========================================
+(function() {
+  const carouselWrap = document.querySelector('.carousel-premium-wrap');
+  if (!carouselWrap) return;
+
+  const carousel = carouselWrap.querySelector('.carousel-premium');
+  const btnLeft = carouselWrap.querySelector('.carousel-nav-left');
+  const btnRight = carouselWrap.querySelector('.carousel-nav-right');
+
+  if (btnLeft && btnRight && carousel) {
+    btnLeft.addEventListener('click', () => {
+      const scrollAmount = carousel.clientWidth * 0.8;
+      carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    btnRight.addEventListener('click', () => {
+      const scrollAmount = carousel.clientWidth * 0.8;
+      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+  }
+})();
+
+// ========================================
 // OPÇÃO 2: SISTEMA DE FILTROS - GALERIA
 // ========================================
 (function() {
